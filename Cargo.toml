@@ -1,0 +1,34 @@
+[package]
+name = "esp-bug-test"
+version = "0.1.0"
+authors = ["Dominik Gschwind <dominik.gschwind99@gmail.com>"]
+edition = "2021"
+resolver = "2"
+
+[profile.release]
+opt-level = "s"
+
+[profile.dev]
+debug = true # Symbols are nice and they don't increase the size on Flash
+opt-level = "z"
+
+[features]
+pio = ["esp-idf-sys/pio"]
+
+[dependencies]
+esp-idf-hal = { version = "0.38.0", features = ["experimental"] }
+esp-idf-svc = { version = "0.42.1", features = ["experimental", "isr-async-executor"] }
+esp-idf-sys = { version = "0.31.6", features = ["binstart"] }
+embedded-svc = { version = "0.22.1", features = ["experimental"] }
+heapless = { version = "0.7.16", features = ["cas"] }
+futures = { version = "0.3.21", features = ["async-await"] }
+
+thiserror = "1.0.32"
+log = "0.4.17"
+palette = { version = "0.6.1", default-features = false, features = ["std"] }
+num-traits = { version = "0.2.15", features = ["i128"] }
+
+
+[build-dependencies]
+embuild = "0.30"
+anyhow = "1"
